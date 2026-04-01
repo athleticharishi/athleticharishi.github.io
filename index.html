@@ -563,6 +563,118 @@ footer {
   to { opacity: 1; }
 }
 
+
+@media (max-width: 768px) {
+  nav {
+    padding: 14px 20px;
+    background: rgba(250,247,242,0.97) !important;
+    border-bottom: 1px solid rgba(107,30,46,0.1);
+  }
+  .nav-links { display: none; }
+  .nav-logo-ja { font-size: 11px; }
+  .nav-logo-en { font-size: 9px; }
+
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    grid-template-columns: 1fr;
+  }
+  .hero-content {
+    padding: 100px 24px 60px;
+    max-width: 100%;
+  }
+  .hero-label { font-size: 9px; margin-bottom: 24px; }
+  .hero-title { font-size: 32px; line-height: 1.4; }
+  .hero-title-accent { font-size: 40px; }
+  .hero-sub { font-size: 13px; line-height: 2; margin: 24px 0 36px; }
+  .hero-cta { flex-direction: column; gap: 12px; }
+  .btn-primary, .btn-secondary { text-align: center; padding: 14px 24px; font-size: 11px; }
+  .hero-scroll { display: none; }
+  .hero-badge { display: none; }
+
+  .strip { padding: 16px 20px; gap: 16px; flex-wrap: wrap; }
+  .strip-item-num { font-size: 22px; }
+  .strip-item-text { font-size: 11px; }
+  .strip-divider { display: none; }
+
+  .concept {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    padding: 60px 24px !important;
+  }
+  .concept-img-main { height: 260px; box-shadow: none; }
+  .concept-img-sub { display: none; }
+  .concept-img-label { display: none; }
+  .section-title { font-size: 26px; }
+  .section-text { font-size: 13px; }
+
+  .quote-section { padding: 60px 24px; }
+  .quote-text { font-size: 20px; line-height: 1.7; }
+  .quote-sub { font-size: 13px; }
+
+  .story { padding: 60px 24px; }
+  .story-header h2 { font-size: 26px; }
+  .story-timeline { max-width: 100%; }
+  .timeline-item {
+    grid-template-columns: 70px 1fr;
+    gap: 12px;
+  }
+  .timeline-item::before { left: 69px; }
+  .timeline-dot { left: 64px; width: 10px; height: 10px; top: 6px; }
+  .timeline-left { padding-bottom: 40px; }
+  .timeline-year { font-size: 20px; }
+  .timeline-location { font-size: 10px; }
+  .timeline-right { padding-left: 20px; padding-bottom: 40px; }
+  .timeline-img { height: 180px; }
+  .timeline-title { font-size: 15px; }
+  .timeline-text { font-size: 12px; }
+
+  .mission { padding: 60px 24px; }
+  .mission-header .section-title { font-size: 26px; }
+  .mission-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .mission-card-num { font-size: 36px; }
+  .mission-card-title { font-size: 15px; }
+  .mission-card-text { font-size: 13px; }
+
+  .founder { padding: 60px 24px; }
+  .founder-inner {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .founder-img-main { height: 360px; box-shadow: none; }
+  .founder-img-mlb { width: 90px; height: 90px; top: -10px; right: -10px; border-width: 3px; }
+  .founder-name-en { font-size: 32px; }
+  .founder-name-ja { font-size: 22px; }
+  .founder-bio { font-size: 13px; }
+  .founder-career-year { font-size: 11px; min-width: 64px; }
+  .founder-career-text { font-size: 12px; }
+
+  .vision { padding: 60px 24px; }
+  .vision-title { font-size: 26px; }
+  .vision-text { font-size: 13px; }
+  .vision-photos {
+    grid-template-columns: 1fr !important;
+    gap: 4px;
+  }
+  .vision-photo { height: 160px; }
+
+  .contact { padding: 60px 24px; }
+  .contact-title { font-size: 22px; }
+  .contact-text { font-size: 13px; }
+  .contact-email { font-size: 14px; word-break: break-all; }
+
+  footer {
+    padding: 32px 24px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  .footer-logo { font-size: 11px; }
+  .footer-copy { font-size: 10px; }
+}
 </style>
 </head>
 <body>
