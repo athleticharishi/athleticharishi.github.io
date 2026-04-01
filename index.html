@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一般社団法人 アスレティック鍼灸師協会</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --burgundy: #6B1E2E;
+  --burgundy-dark: #4A1320;
+  --burgundy-light: #8B3A4A;
+  --gold: #A07840;
+  --gold-light: #C9A96E;
+  --cream: #FAF7F2;
+  --cream-dark: #F0EAE0;
+  --warm-white: #FFFDF9;
+  --dark: #1C1410;
+  --mid: #5A4A40;
+  --light: #9A8A80;
+  --silver: #E8E0D8;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 60px;
+  transition: all 0.4s;
+}
+nav.scrolled {
+  background: rgba(250,247,242,0.97);
+  backdrop-filter: blur(20px);
+  padding: 16px 60px;
+  border-bottom: 1px solid rgba(107,30,46,0.1);
+  box-shadow: 0 4px 30px rgba(107,30,46,0.06);
+}
+.nav-logo { display: flex; flex-direction: column; gap: 3px; }
+.nav-logo-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px; letter-spacing: 0.35em;
+  color: var(--burgundy); text-transform: uppercase;
+}
+.nav-logo-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px; font-weight: 400; letter-spacing: 0.08em;
+  color: var(--dark);
+}
+.nav-links { display: flex; gap: 44px; list-style: none; }
+.nav-links a {
+  font-size: 11px; letter-spacing: 0.15em; color: var(--mid);
+  text-decoration: none; text-transform: uppercase;
+  transition: color 0.3s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--burgundy);
+  transform: scaleX(0); transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--burgundy); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  background: var(--burgundy) !important;
+  color: white !important; padding: 10px 28px;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--burgundy-dark) !important; }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh; position: relative;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--cream) 0%, #F0E4D8 50%, #E8D4C4 100%);
+}
+.hero-pattern {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    repeating-linear-gradient(45deg, var(--burgundy) 0, var(--burgundy) 1px, transparent 0, transparent 50%);
+  background-size: 24px 24px;
+}
+.hero-right-wash {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 55%;
+  background: url('images/osg.jpg') center/cover no-repeat;
+  opacity: 0.18;
+  mask-image: linear-gradient(to left, rgba(0,0,0,0.6) 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 80px; max-width: 800px;
+  padding-top: 80px;
+}
+.hero-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; letter-spacing: 0.4em;
+  color: var(--burgundy); text-transform: uppercase;
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 40px;
+  opacity: 0; animation: fadeUp 1s 0.3s ease forwards;
+}
+.hero-label::before { content: ''; width: 50px; height: 1px; background: var(--burgundy); }
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 200; line-height: 1.5;
+  color: var(--dark); margin-bottom: 8px;
+  opacity: 0; animation: fadeUp 1s 0.5s ease forwards;
+}
+.hero-title-accent {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 300;
+  font-size: clamp(52px, 7vw, 92px);
+  color: var(--burgundy); display: block; line-height: 1.1;
+}
+.hero-sub {
+  font-size: 15px; line-height: 2.3;
+  color: var(--mid); max-width: 500px;
+  margin: 40px 0 56px;
+  opacity: 0; animation: fadeUp 1s 0.7s ease forwards;
+}
+.hero-cta {
+  display: flex; gap: 16px;
+  opacity: 0; animation: fadeUp 1s 0.9s ease forwards;
+}
+.btn-primary {
+  background: var(--burgundy); color: white;
+  padding: 16px 40px; border: none;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; letter-spacing: 0.2em;
+  text-decoration: none; display: inline-block;
+  transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--burgundy-dark); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(107,30,46,0.25); }
+.btn-secondary {
+  background: transparent; color: var(--burgundy);
+  padding: 16px 40px; border: 1.5px solid var(--burgundy);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; letter-spacing: 0.2em;
+  text-decoration: none; display: inline-block;
+  transition: all 0.3s;
+}
+.btn-secondary:hover { background: var(--burgundy); color: white; }
+
+.hero-scroll {
+  position: absolute; bottom: 48px; left: 80px;
+  display: flex; align-items: center; gap: 16px;
+  opacity: 0; animation: fadeIn 1s 1.5s ease forwards;
+}
+.hero-scroll-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px; letter-spacing: 0.3em;
+  color: var(--light); text-transform: uppercase;
+}
+.hero-scroll-line {
+  width: 60px; height: 1px;
+  background: linear-gradient(to right, var(--light), transparent);
+}
+.hero-badge {
+  position: absolute; right: 80px; bottom: 80px;
+  width: 140px; height: 140px;
+  border: 1px solid rgba(107,30,46,0.2);
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px; opacity: 0;
+  animation: fadeIn 1s 1.2s ease forwards;
+}
+.hero-badge-text1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  color: var(--burgundy); text-transform: uppercase;
+  text-align: center;
+}
+.hero-badge-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 300;
+  color: var(--burgundy); line-height: 1;
+}
+.hero-badge-text2 {
+  font-size: 10px; color: var(--light);
+  letter-spacing: 0.1em; text-align: center;
+}
+
+/* ── STRIP ── */
+.strip {
+  background: var(--burgundy);
+  padding: 24px 80px;
+  display: flex; align-items: center; gap: 60px;
+  overflow: hidden;
+}
+.strip-item {
+  display: flex; align-items: center; gap: 16px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.strip-item-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 300; color: rgba(255,255,255,0.3);
+}
+.strip-item-text {
+  font-size: 12px; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.8);
+}
+.strip-divider {
+  width: 1px; height: 30px;
+  background: rgba(255,255,255,0.15); flex-shrink: 0;
+}
+
+/* ── CONCEPT ── */
+.concept {
+  padding: 140px 80px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 100px; align-items: center;
+  max-width: 1400px; margin: 0 auto;
+}
+.section-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; letter-spacing: 0.4em;
+  color: var(--burgundy); text-transform: uppercase;
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 36px;
+}
+.section-tag::before { content: ''; width: 30px; height: 1px; background: var(--burgundy); }
+.section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 300; line-height: 1.7;
+  color: var(--dark); margin-bottom: 36px;
+}
+.section-title strong { font-weight: 600; color: var(--burgundy); }
+.section-text {
+  font-size: 14px; line-height: 2.4; color: var(--mid);
+}
+.concept-right { position: relative; }
+.concept-img-main {
+  width: 100%; height: 520px;
+  object-fit: cover; display: block;
+  box-shadow: 24px 24px 0 var(--cream-dark);
+}
+.concept-img-sub {
+  position: absolute; bottom: -40px; left: -40px;
+  width: 200px; height: 200px;
+  object-fit: cover;
+  border: 6px solid var(--cream);
+  box-shadow: 0 8px 40px rgba(107,30,46,0.15);
+}
+.concept-img-label {
+  position: absolute; top: 24px; right: 24px;
+  background: white; padding: 8px 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  color: var(--burgundy); text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* ── QUOTE ── */
+.quote-section {
+  background: var(--cream-dark);
+  padding: 120px 80px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.quote-section::before {
+  content: '"';
+  position: absolute; top: -20px; left: 60px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 300px; font-weight: 300;
+  color: rgba(107,30,46,0.05); line-height: 1;
+  pointer-events: none;
+}
+.quote-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+.quote-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 300; line-height: 1.8;
+  color: var(--dark); margin-bottom: 48px;
+}
+.quote-text em {
+  font-style: normal; color: var(--burgundy); font-weight: 600;
+}
+.quote-divider {
+  width: 60px; height: 1px;
+  background: var(--burgundy); margin: 0 auto 32px;
+}
+.quote-attr {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; letter-spacing: 0.2em;
+  color: var(--light); text-transform: uppercase;
+}
+.quote-sub {
+  font-size: 13px; line-height: 2.2; color: var(--mid);
+  max-width: 600px; margin: 40px auto 0;
+}
+
+/* ── STORY ── */
+.story { padding: 140px 80px; }
+.story-header { text-align: center; margin-bottom: 80px; }
+.story-header .section-tag { justify-content: center; }
+.story-header .section-tag::before { display: none; }
+.story-header .section-tag::after { content: ''; width: 30px; height: 1px; background: var(--burgundy); }
+.story-header .section-title { text-align: center; }
+
+.story-timeline { max-width: 1000px; margin: 0 auto; }
+.timeline-item {
+  display: grid; grid-template-columns: 120px 1fr;
+  gap: 48px; margin-bottom: 0;
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute; left: 119px; top: 0; bottom: 0;
+  width: 1px; background: var(--silver);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-left { text-align: right; padding-top: 4px; padding-bottom: 60px; }
+.timeline-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300; color: var(--burgundy);
+  line-height: 1; display: block; margin-bottom: 4px;
+}
+.timeline-location {
+  font-size: 11px; color: var(--light);
+  letter-spacing: 0.1em;
+}
+.timeline-dot {
+  position: absolute; left: 113px; top: 8px;
+  width: 13px; height: 13px;
+  border-radius: 50%; background: white;
+  border: 2px solid var(--burgundy);
+  z-index: 2;
+}
+.timeline-right { padding-left: 48px; padding-bottom: 60px; }
+.timeline-img {
+  width: 100%; height: 260px;
+  object-fit: cover; margin-bottom: 24px;
+  display: block;
+}
+.timeline-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px; letter-spacing: 0.3em;
+  color: var(--burgundy); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.timeline-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px; font-weight: 400;
+  color: var(--dark); line-height: 1.5; margin-bottom: 12px;
+}
+.timeline-text {
+  font-size: 13px; line-height: 2; color: var(--mid);
+}
+
+/* ── MISSION ── */
+.mission {
+  background: var(--burgundy);
+  padding: 140px 80px; position: relative; overflow: hidden;
+}
+.mission-pattern {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 0, transparent 40px),
+    repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 0, transparent 40px);
+}
+.mission-inner {
+  max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 2;
+}
+.mission-header { margin-bottom: 80px; }
+.mission-header .section-tag { color: rgba(255,255,255,0.4); }
+.mission-header .section-tag::before { background: rgba(255,255,255,0.2); }
+.mission-header .section-title { color: white; }
+.mission-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+}
+.mission-card {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 36px;
+}
+.mission-card-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300;
+  color: rgba(255,255,255,0.15); line-height: 1; margin-bottom: 20px;
+}
+.mission-card-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px; font-weight: 400;
+  color: white; margin-bottom: 16px; line-height: 1.5;
+}
+.mission-card-text {
+  font-size: 13px; line-height: 2.1;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── FOUNDER ── */
+.founder {
+  padding: 140px 80px; background: var(--warm-white);
+}
+.founder-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 480px;
+  gap: 100px; align-items: center;
+}
+.founder-left { }
+.founder-left .section-tag { }
+.founder-name-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px; font-weight: 300;
+  color: rgba(107,30,46,0.08); line-height: 1;
+  letter-spacing: 0.02em; margin-bottom: 4px;
+}
+.founder-name-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 30px; font-weight: 400;
+  color: var(--dark); margin-bottom: 6px;
+}
+.founder-title {
+  font-size: 13px; color: var(--burgundy);
+  letter-spacing: 0.05em; margin-bottom: 36px;
+}
+.founder-bio {
+  font-size: 14px; line-height: 2.4; color: var(--mid);
+  margin-bottom: 48px;
+}
+.founder-career { display: flex; flex-direction: column; gap: 0; }
+.founder-career-item {
+  display: flex; gap: 0; align-items: stretch;
+  border-left: 2px solid var(--silver);
+  padding-left: 24px; padding-bottom: 24px;
+  position: relative;
+}
+.founder-career-item::before {
+  content: ''; position: absolute;
+  left: -5px; top: 6px;
+  width: 8px; height: 8px;
+  border-radius: 50%; background: var(--burgundy);
+}
+.founder-career-item:last-child { padding-bottom: 0; }
+.founder-career-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; color: var(--burgundy);
+  letter-spacing: 0.05em; min-width: 80px; flex-shrink: 0;
+}
+.founder-career-text {
+  font-size: 13px; line-height: 1.8; color: var(--mid);
+}
+.founder-right { position: relative; }
+.founder-img-main {
+  width: 100%; height: 560px;
+  object-fit: cover; display: block;
+  box-shadow: -20px 20px 0 var(--cream-dark);
+}
+.founder-img-mlb {
+  position: absolute; top: -24px; right: -24px;
+  width: 150px; height: 150px;
+  object-fit: cover;
+  border: 5px solid var(--warm-white);
+  box-shadow: 0 8px 30px rgba(107,30,46,0.2);
+}
+
+/* ── VISION ── */
+.vision {
+  padding: 140px 80px; text-align: center;
+  background: var(--cream);
+}
+.vision-inner { max-width: 780px; margin: 0 auto; }
+.vision-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(26px, 3.5vw, 46px);
+  font-weight: 200; line-height: 1.7;
+  color: var(--dark); margin-bottom: 48px;
+}
+.vision-title strong {
+  font-weight: 600; color: var(--burgundy);
+  display: block; font-size: clamp(30px, 4vw, 54px);
+}
+.vision-divider {
+  width: 60px; height: 2px;
+  background: var(--burgundy); margin: 0 auto 48px;
+}
+.vision-text {
+  font-size: 14px; line-height: 2.6; color: var(--mid); margin-bottom: 64px;
+}
+.vision-photos {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 4px; margin-bottom: 80px;
+}
+.vision-photo {
+  height: 200px; overflow: hidden;
+}
+.vision-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; transition: transform 0.6s ease;
+  filter: grayscale(20%);
+}
+.vision-photo:hover img { transform: scale(1.08); filter: grayscale(0%); }
+
+/* ── CONTACT ── */
+.contact {
+  background: var(--burgundy-dark);
+  padding: 120px 80px; text-align: center;
+}
+.contact-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 300; color: white;
+  line-height: 1.7; margin-bottom: 24px;
+}
+.contact-text { font-size: 14px; line-height: 2.2; color: rgba(255,255,255,0.5); margin-bottom: 60px; }
+.contact-email {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; color: var(--gold-light);
+  letter-spacing: 0.1em; text-decoration: none;
+  display: block; margin-bottom: 48px; transition: opacity 0.3s;
+}
+.contact-email:hover { opacity: 0.7; }
+.btn-gold {
+  background: var(--gold-light); color: var(--dark);
+  padding: 16px 48px; border: none;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; letter-spacing: 0.2em;
+  text-decoration: none; display: inline-block;
+  transition: all 0.3s; font-weight: 500;
+}
+.btn-gold:hover { background: #E0C080; transform: translateY(-2px); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  padding: 48px 80px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5);
+}
+.footer-logo span {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px; letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.2); margin-top: 4px;
+}
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-en">Athletic Acupuncturist Association</div>
+    <div class="nav-logo-ja">一般社団法人 アスレティック鍼灸師協会</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#concept">About</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-right-wash"></div>
+  <div class="hero-content">
+    <div class="hero-label">Athletic Acupuncturist Association of Japan</div>
+    <h1 class="hero-title">
+      アスリートの日常を
+      <span class="hero-title-accent">支える、</span>
+      治療のプロへ。
+    </h1>
+    <p class="hero-sub">
+      治療院という場所から、アスリートの夢を支え続ける。<br>
+      日本の鍼灸師が持つ、世界最高水準の技術と繊細さで。
+    </p>
+    <div class="hero-cta">
+      <a href="#concept" class="btn-primary">協会について</a>
+      <a href="#contact" class="btn-secondary">お問い合わせ</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll</span>
+  </div>
+  <div class="hero-badge">
+    <span class="hero-badge-text1">Est.</span>
+    <span class="hero-badge-num">2026</span>
+    <span class="hero-badge-text2">Japan</span>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">
+    <span class="strip-item-num">30+</span>
+    <span class="strip-item-text">Years of Experience</span>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <span class="strip-item-num">MLB</span>
+    <span class="strip-item-text">Detroit Tigers</span>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <span class="strip-item-num">五輪</span>
+    <span class="strip-item-text">北京オリンピック 2008</span>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <span class="strip-item-num">鍼灸師</span>
+    <span class="strip-item-text">専門の資格制度</span>
+  </div>
+</div>
+
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+  <div class="concept-left reveal">
+    <div class="section-tag">Our Concept</div>
+    <h2 class="section-title">
+      治療院から、<br>
+      <strong>世界を変える。</strong>
+    </h2>
+    <p class="section-text">
+      アスレティック鍼灸師のメインフィールドは、治療院です。スポーツ現場ではなく、選手が毎週通い、身体を預け、悩みを話せる「かかりつけの治療家」として、アスリートの日常に寄り添うこと。<br><br>
+      日本の鍼灸師は、国家資格として体系的な教育を受けた世界最高水準の治療家です。日本人の手先の繊細さと器用さは、世界のどの国の治療家も及ばないアドバンテージ。その強みに、スポーツ医学の視点を加えることで、海外が学びに来る専門家が生まれます。
+    </p>
+  </div>
+  <div class="concept-right reveal reveal-delay-2">
+    <img src="images/講習写真.jpg" alt="治療の現場" class="concept-img-main">
+    <img src="images/名称未設定のデザイン__2_.png" alt="セミナー" class="concept-img-sub">
+    <div class="concept-img-label">Clinical Field</div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-inner reveal">
+    <p class="quote-text">
+      「一人で治せなくていい。<br>
+      <em>チームで治せればいい。</em>」
+    </p>
+    <div class="quote-divider"></div>
+    <div class="quote-attr">Kazuhiro Hayakawa / 早川和浩</div>
+    <p class="quote-sub">
+      米国MLBの現場で学んだこと。本物のプロフェッショナルは、自分一人で全てを解決しようとしない。得意を深め、限界を知り、専門家へ繋ぐ。アスレティック鍼灸師は、そのチームの一員です。
+    </p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-header reveal">
+    <div class="section-tag">Our Story</div>
+    <h2 class="section-title">
+      現場が教えてくれた、<br>変えなければならない現実。
+    </h2>
+  </div>
+  <div class="story-timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">1999</span>
+        <span class="timeline-location">Detroit, USA</span>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-right">
+        <img src="images/コメリカ.jpg" alt="MLB Tigers" class="timeline-img">
+        <div class="timeline-tag">MLB / Detroit Tigers</div>
+        <div class="timeline-title">日本人初 MLBアシスタントトレーナー</div>
+        <div class="timeline-text">デトロイト・タイガースでの2年間が、チーム医療の本質を教えてくれた。医師、トレーナー、治療家が一つのチームとして選手を支える文化。その経験が、今の協会の哲学の原点になっている。</div>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">2008</span>
+        <span class="timeline-location">Beijing, China</span>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-right">
+        <img src="images/P1000250.jpg" alt="Beijing 2008" class="timeline-img">
+        <div class="timeline-tag">Beijing Olympics</div>
+        <div class="timeline-title">北京五輪 日本重量挙げ代表専属トレーナー</div>
+        <div class="timeline-text">オリンピックの舞台で、アスリートを支える治療家としての使命を確信した。世界の頂点を目指す選手たちの身体を守ること。それが、鍼灸師としての最高の舞台だった。</div>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">2026</span>
+        <span class="timeline-location">Japan</span>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-right">
+        <img src="images/IMG_3581_2.png" alt="協会設立" class="timeline-img">
+        <div class="timeline-tag">Association Founded</div>
+        <div class="timeline-title">アスレティック鍼灸師協会 設立</div>
+        <div class="timeline-text">治療院から、日本のスポーツ医療文化を変える挑戦が始まる。怪我で夢を諦めるアスリートをなくすために。第二、第三の大谷翔平が育つ環境をつくるために。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="mission-pattern"></div>
+  <div class="mission-inner">
+    <div class="mission-header reveal">
+      <div class="section-tag">Our Mission</div>
+      <h2 class="section-title">
+        子どもたちの夢を、<br>治療院から守る。
+      </h2>
+    </div>
+    <div class="mission-grid">
+      <div class="mission-card reveal">
+        <div class="mission-card-num">01</div>
+        <div class="mission-card-title">鍼灸師自身が、変わる。</div>
+        <div class="mission-card-text">指導者を変えることは難しい。でも、私たち鍼灸師自身が変わることは今すぐできます。スポーツの怪我に適切に対応できる鍼灸師を日本中に増やすこと。それが最も現実的な解決策です。</div>
+      </div>
+      <div class="mission-card reveal reveal-delay-1">
+        <div class="mission-card-num">02</div>
+        <div class="mission-card-title">怪我で夢を諦めさせない。</div>
+        <div class="mission-card-text">痛いと言えない環境、休みのない練習、そして夢の途中で競技を諦めざるを得ない子どもたち。その現場を何度も目の当たりにしてきた。第二、第三の大谷翔平が育つ環境をつくります。</div>
+      </div>
+      <div class="mission-card reveal reveal-delay-2">
+        <div class="mission-card-num">03</div>
+        <div class="mission-card-title">世界が学びに来る場所へ。</div>
+        <div class="mission-card-text">日本人の手先の繊細さと器用さは、世界のどの国の治療家も及ばないアドバンテージ。海外のシステムを模倣するのではなく、世界が学びに来る日本の鍼灸を確立します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder" id="founder">
+  <div class="founder-inner">
+    <div class="founder-left reveal">
+      <div class="section-tag">Founder & Representative Director</div>
+      <div class="founder-name-en">Kazuhiro Hayakawa</div>
+      <div class="founder-name-ja">早川 和浩</div>
+      <div class="founder-title">代表理事 ／ 鍼灸師・あん摩マッサージ指圧師</div>
+      <p class="founder-bio">
+        愛知県岡崎市出身。米国ジョージア大学で健康教育・運動科学を学び、NATA公認アスレティックトレーナーの資格を取得。帰国後、日本のスポーツ医療の現場と国際舞台の両方で、30年にわたりアスリートを支え続けてきた。<br><br>
+        MLBの現場で感じた日米の差、北京五輪での経験、そして治療院で何度も目の当たりにしてきた「怪我で夢を諦める子どもたち」。その全てが、アスレティック鍼灸師協会設立の原動力となっている。
+      </p>
+      <div class="founder-career">
+        <div class="founder-career-item">
+          <div class="founder-career-year">1997</div>
+          <div class="founder-career-text">NATA公認アスレティックトレーナー資格取得</div>
+        </div>
+        <div class="founder-career-item">
+          <div class="founder-career-year">1999–2000</div>
+          <div class="founder-career-text">MLBデトロイト・タイガース アシスタントトレーナー（日本人初）</div>
+        </div>
+        <div class="founder-career-item">
+          <div class="founder-career-year">2008</div>
+          <div class="founder-career-text">北京オリンピック 日本重量挙げ代表専属トレーナー</div>
+        </div>
+        <div class="founder-career-item">
+          <div class="founder-career-year">2008–</div>
+          <div class="founder-career-text">早川治療院 開院（愛知県長久手市）</div>
+        </div>
+        <div class="founder-career-item">
+          <div class="founder-career-year">2023–</div>
+          <div class="founder-career-text">トヨタ紡織スコーピオンズ チームトレーナー</div>
+        </div>
+        <div class="founder-career-item">
+          <div class="founder-career-year">2024–</div>
+          <div class="founder-career-text">JTEKTスティングス チームトレーナー</div>
+        </div>
+      </div>
+    </div>
+    <div class="founder-right reveal reveal-delay-2">
+      <img src="images/image_2.jpg" alt="早川和浩" class="founder-img-main">
+      <img src="images/メディアガイド.jpeg" alt="MLB Media Guide" class="founder-img-mlb">
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision">
+  <div class="vision-inner reveal">
+    <div class="section-tag" style="justify-content:center">
+      <span style="width:30px;height:1px;background:var(--burgundy);display:block"></span>
+      Our Vision
+      <span style="width:30px;height:1px;background:var(--burgundy);display:block"></span>
+    </div>
+    <h2 class="vision-title">
+      日本の鍼灸が、<br>
+      <strong>世界のスタンダードになる。</strong>
+    </h2>
+    <div class="vision-divider"></div>
+    <p class="vision-text">
+      米国では鍼灸が補完代替医療として西洋医学を補う形で学ばれています。しかし日本の鍼灸師は、東洋医学の深い知識と技術をすでに持っている。そこにスポーツ医学の視点を加えれば、世界最高水準の専門家が生まれます。<br><br>
+      アスレティック鍼灸師協会は、海外のシステムを模倣するのではなく、世界が日本に学びに来る日を目指します。
+    </p>
+    <div class="vision-photos">
+      <div class="vision-photo">
+        <img src="images/IMG_3581_2.png" alt="治療">
+      </div>
+      <div class="vision-photo">
+        <img src="images/IMG_3688.png" alt="テーピング">
+      </div>
+      <div class="vision-photo">
+        <img src="images/名称未設定のデザイン__2_.png" alt="セミナー">
+      </div>
+    </div>
+    <a href="#contact" class="btn-primary">協会への参加を検討する</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 class="contact-title reveal">まず、話を聞いてみませんか。</h2>
+  <p class="contact-text reveal">
+    アスレティック鍼灸師協会の活動や資格制度について、<br>お気軽にご連絡ください。
+  </p>
+  <a href="/cdn-cgi/l/email-protection#f79e999198b796839f9b92839e94da969482878299948382859e8483d99d87" class="contact-email reveal">
+    <span class="__cf_email__" data-cfemail="a5cccbc3cae5c4d1cdc9c0d1ccc688c4c6d0d5d0cbc6d1d0d7ccd6d18bcfd5">[email&#160;protected]</span>
+  </a>
+  <a href="/cdn-cgi/l/email-protection#274e4941486746534f4b42534e440a464452575249445352554e5453094d57" class="btn-gold reveal">
+    メールで問い合わせる
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    一般社団法人 アスレティック鍼灸師協会
+    <span>Athletic Acupuncturist Association of Japan</span>
+  </div>
+  <div class="footer-copy">© 2026 Athletic Acupuncturist Association. All rights reserved.</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.
